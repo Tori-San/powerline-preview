@@ -1,0 +1,94 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<style>
+@font-face{
+    font-family: "Hack";
+    src: url("file:///usr/share/fonts/TTF/Hack-Regular.ttf");
+}
+
+@font-face{
+    font-family: "Powerline";
+    src: url("file:///usr/share/fonts/OTF/PowerlineSymbols.otf");
+}
+
+.preview {
+    font-size: 0px;
+}
+
+.ib {
+    display: inline-block;
+    font-family: Hack, Powerline;
+    font-size: 16px;
+}
+
+body {
+    --l1-fg:#000000;
+    --l1-bg:#ffffff;
+    --l2-fg:#ffffff;
+    --l2-bg:#000000;
+    --l3-fg:#888888;
+    --l3-bg:#000000;
+    --l4-fg:#888888;
+    --l4-bg:#000000;
+}
+</style>
+<div id="preview" class=preview>
+    <div class="ib level1">level1</div>
+    <div class="ib sep12"></div>
+    <div class="ib level2">level2</div>
+    <div class="ib sep23"></div>
+    <div class="ib level3">level3</div>
+    <div class="ib sep34"></div>
+    <div class="ib level4">level4</div>
+    <div class="ib sepr43"></div>
+    <div class="ib level3">level3</div>
+    <div class="ib sepr32"></div>
+    <div class="ib level2">level2</div>
+    <div class="ib sepr21"></div>
+    <div class="ib level1">level1</div>
+</div>
+
+<script>
+
+/*
+    BEWARE: ARCANE BULLSHIT
+
+    the two following statements assume that
+    the "level" or "sep"/"rsep" classes appear
+    last in the className
+*/
+$("[class*=level]").each(function() {
+    let cls = this.className;
+    cls = "l" + cls.slice(cls.indexOf("level") + 5);
+    this.style.color = "var(--"+cls+"-fg)";
+    this.style.backgroundColor = "var(--"+cls+"-bg)";
+    this.style.borderStyle = "solid";
+    this.style.borderWidth = "0px 5px 0px 5px";
+    this.style.borderColor = "var(--"+cls+"-bg)";
+});
+
+$("[class*=sep]").each(function() {
+    let cls = this.className;
+    cls = cls.slice(cls.indexOf("sep") + 3);
+    let reversed = cls.startsWith("r");
+    let left, right;
+    if (reversed) {
+        cls = cls.slice(1);
+        left = cls[1];
+        right = cls[0];
+    } else {
+        left = cls[0];
+        right = cls[1];
+    }
+    fg = "--l" + left + "-bg"; // bg intentional
+    bg = "--l" + right + "-bg";
+
+    let soft = ($("body").css(fg) === $("body").css(bg))
+    this.innerText = String.fromCharCode(57520 + 2 * reversed + 1 * soft);
+    if (soft) { fg = "--l" + left + "-fg"; }
+
+    this.style.color = "var(" + fg + ")";
+    this.style.backgroundColor = "var("  + bg + ")";
+
+});
+</script>

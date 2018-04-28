@@ -48,4 +48,8 @@ body {
 
     --l4a-fg:#888888;
     --l4a-bg:#000000;
+
+    /* for line ends */
+    --lnone-fg: transparent;
+    --lnone-bg: transparent;
 }

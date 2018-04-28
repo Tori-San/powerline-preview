@@ -1,13 +1,20 @@
 /*
-    BEWARE: ARCANE BULLSHIT
+ *   BEWARE: ARCANE BULLSHIT
+ *
+ *   the following two functions assume that the "level"
+ *   or "sep" classes appear last in the className
+ */
 
-    the following two functions assume that the "level"
-    or "sep" classes appear last in the className
-*/
+/* Set appropriate text and background color
+ *
+ * Example: <div class="level-foobar"> gets
+ *          color: var(--lfoobar-fg) and
+ *          background-color: var(--lfoobar-bg)
+ */
 function setLevelClassStyle() {
     $("[class*=level]").each(function() {
         let cls = this.className;
-        cls = "l" + cls.split("-").pop();
+        cls = "l" + cls.slice(cls.indexOf("level") + 6);
         this.style.color = "var(--"+cls+"-fg)";
         this.style.backgroundColor = "var(--"+cls+"-bg)";
         this.style.borderStyle = "solid";
@@ -16,6 +23,13 @@ function setLevelClassStyle() {
     });
 }
 
+/* Draw seperators with appropriate weight, color and direction
+ *
+ * Example: <div class="sep-foo-bar"> is set to a forward facing
+ *          seperator between levels foo and bar.
+ *          If the background color of those levels is the same,
+ *          it is also set to a soft seperator.
+ */
 function redrawSeperators() {
     $("[class*=sep]").each(function() {
         let cls = this.className;

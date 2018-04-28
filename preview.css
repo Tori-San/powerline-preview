@@ -1,0 +1,30 @@
+@font-face{
+    font-family: "Hack";
+    src: url("fonts/Hack-Regular.ttf");
+}
+
+@font-face{
+    font-family: "Powerline";
+    src: url("fonts/PowerlineSymbols.otf");
+}
+
+.preview {
+    font-size: 0px;
+}
+
+.preview > div {
+    display: inline-block;
+    font-family: Hack, Powerline;
+    font-size: 16px;
+}
+
+body {
+    --l1-fg:#000000;
+    --l1-bg:#ffffff;
+    --l2-fg:#ffffff;
+    --l2-bg:#000000;
+    --l3-fg:#888888;
+    --l3-bg:#000000;
+    --l4-fg:#888888;
+    --l4-bg:#000000;
+}

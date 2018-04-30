@@ -13,6 +13,29 @@
     src: url("fonts/fontawesome-webfont.ttf");
 }
 
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+
+.column {
+    vertical-align: top;
+    background-color: #888888;
+    display: table-cell;
+}
+
+.column.middle {
+    border: 5px solid #888888;
+    width: 960px;
+}
+
+.column.left {
+    padding: 5px;
+    border-right: 5px solid #444444;
+}
+
+.column.right {
+    padding: 5px;
+    border-left: 5px solid #444444;
+}
+
 .preview {
     font-size: 0px;
 }
@@ -49,6 +72,8 @@
 }
 
 #canvas-placeholder-text {
+    font-family: "Noto Sans", sans-serif;
+    cursor: pointer;
     color: #eeeeee;
     font-size: 32px;
     position: absolute;
@@ -57,40 +82,60 @@
     transform: translate(-50%, -50%);
 }
 
+#canvas-placeholder-text:hover {
+    color: #ffffff;
+}
+
 #cs {
+    display: none;
+    cursor: crosshair;
+}
+
+#img-upload {
     display: none;
 }
 
+.spacer {
+    height: 20px;
+}
+
 body {
-    --l1-fg:#000000;
+    display: table;
+    height: 100%;
+    width: 100%;
+    margin:0;
+    table-layout: fixed;
+    background-color: #252525;
+
+    --l1-fg:#005f5f;
     --l1-bg:#ffffff;
 
-    --l1a-fg:#000000;
-    --l1a-bg:#ffffff;
+    --l1a-fg:#ffffff;
+    --l1a-bg:#87af00;
 
-    --l1v-fg:#000000;
-    --l1v-bg:#ffffff;
+    --l1v-fg:#ffd787;
+    --l1v-bg:#ff8700;
 
-    --l1r-fg:#000000;
-    --l1r-bg:#ffffff;
+    --l1r-fg:#ffffff;
+    --l1r-bg:#5f0000;
 
     --l2-fg:#ffffff;
-    --l2-bg:#000000;
+    --l2-bg:#00af87;
 
     --l2a-fg:#ffffff;
-    --l2a-bg:#000000;
+    --l2a-bg:#00af87;
 
-    --l3-fg:#888888;
-    --l3-bg:#000000;
+    --l3-fg:#ffffff;
+    --l3-bg:#00875f;
 
-    --l3a-fg:#888888;
-    --l3a-bg:#000000;
+    --l3a-fg:#ffffff;
+    --l3a-bg:#00875f;
 
-    --l4-fg:#888888;
-    --l4-bg:#000000;
+    --l4-fg:#ffffff;
+    --l4-bg:#005f5f;
 
-    --l4a-fg:#888888;
-    --l4a-bg:#000000;
+    --l4a-fg:#ffffff;
+    --l4a-bg:#005f5f;
 
     /* for line ends */
     --lnone-fg: transparent;

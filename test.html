@@ -3,51 +3,105 @@
     <link rel="stylesheet" type="text/css" href="preview.css" />
 </head>
 <body>
-    <div id="preview-wm">
-        <div id="canvas-placeholder">
-            <div id="canvas-placeholder-text">select an image</div>
+    <div class="column left">
+        Left
+    </div>
+    <div class="column middle">
+        <div id="preview-wm">
+            <div id="canvas-placeholder">
+                <input id="img-upload" type="file" accept=".jpg, .jpeg, .png">
+                <div id="canvas-placeholder-text">select an image</div>
+            </div>
+            <canvas id="cs" width=960 height=540></canvas>
+            <div class="preview left">
+                <div class="level-1">&#xf0ae;<!-- ws-icon --></div>
+                <div class="sep-1-2"></div>
+                <div class="level-2">1 &#xf268;<!-- chrome --></div>
+                <div class="sep-2-1"></div>
+                <div class="level-1">2 &#xf120;<!-- >_ --></div>
+                <div class="sep-1-2"></div>
+                <div class="level-2">3 &#xf120;<!-- >_ --></div>
+                <div class="sep-2-2"></div>
+                <div class="level-2">&#x2022;<!-- dot --></div>
+                <div class="sep-2-3"></div>
+                <div class="level-3">window title</div>
+                <div class="sep-3-none"></div>
+            </div>
+            <div class="preview right">
+                <div class="sepr-none-3"></div>
+                <div class="level-3">W 6.6.6.6</div>
+                <div class="sepr-3-3"></div>
+                <div class="level-3">0W</div>
+                <div class="sepr-3-2"></div>
+                <div class="level-2">Dec 25</div>
+                <div class="sepr-2-1"></div>
+                <div class="level-1">13:37</div>
+            </div>
         </div>
-        <canvas id="cs" width=960 height=540></canvas>
-        <div class="preview left">
-            <div class="level-1">&#xf0ae;<!-- ws-icon --></div>
+        <div class=spacer></div>
+        <div class=preview>
+            <div class="level-1">NORMAL</div>
             <div class="sep-1-2"></div>
-            <div class="level-2">1 &#xf268;<!-- chrome --></div>
-            <div class="sep-2-1"></div>
-            <div class="level-1">2 &#xf120;<!-- >_ --></div>
-            <div class="sep-1-2"></div>
-            <div class="level-2">3 &#xf120;<!-- >_ --></div>
-            <div class="sep-2-2"></div>
-            <div class="level-2">&#x2022;<!-- dot --></div>
+            <div class="level-2">master</div>
             <div class="sep-2-3"></div>
-            <div class="level-3">window title</div>
-            <div class="sep-3-none"></div>
-        </div>
-        <div class="preview right">
-            <div class="sepr-none-3"></div>
-            <div class="level-3">W 6.6.6.6</div>
-            <div class="sepr-3-3"></div>
-            <div class="level-3">0W</div>
+            <div class="level-3">preview.js</div>
+            <div class="sep-3-4"></div>
+            <div class="level-4">javascript</div>
+            <div class="sepr-4-3"></div>
+            <div class="level-3">utf-8[unix]</div>
             <div class="sepr-3-2"></div>
-            <div class="level-2">Dec 25</div>
+            <div class="level-2">69%</div>
             <div class="sepr-2-1"></div>
-            <div class="level-1">13:37</div>
+            <div class="level-1">13/37</div>
+        </div>
+        <div class=preview>
+            <div class="level-1a">INSERT</div>
+            <div class="sep-1a-2a"></div>
+            <div class="level-2a">master</div>
+            <div class="sep-2a-3a"></div>
+            <div class="level-3a">preview.js</div>
+            <div class="sep-3a-4a"></div>
+            <div class="level-4a">javascript</div>
+            <div class="sepr-4a-3a"></div>
+            <div class="level-3a">utf-8[unix]</div>
+            <div class="sepr-3a-2a"></div>
+            <div class="level-2a">69%</div>
+            <div class="sepr-2a-1a"></div>
+            <div class="level-1a">13/37</div>
+        </div>
+        <div class=preview>
+            <div class="level-1v">VISUAL</div>
+            <div class="sep-1v-2a"></div>
+            <div class="level-2a">master</div>
+            <div class="sep-2a-3a"></div>
+            <div class="level-3a">preview.js</div>
+            <div class="sep-3a-4a"></div>
+            <div class="level-4a">javascript</div>
+            <div class="sepr-4a-3a"></div>
+            <div class="level-3a">utf-8[unix]</div>
+            <div class="sepr-3a-2a"></div>
+            <div class="level-2a">69%</div>
+            <div class="sepr-2a-1v"></div>
+            <div class="level-1v">13/37</div>
+        </div>
+        <div class=preview>
+            <div class="level-1r">RPLACE</div>
+            <div class="sep-1r-2a"></div>
+            <div class="level-2a">master</div>
+            <div class="sep-2a-3a"></div>
+            <div class="level-3a">preview.js</div>
+            <div class="sep-3a-4a"></div>
+            <div class="level-4a">javascript</div>
+            <div class="sepr-4a-3a"></div>
+            <div class="level-3a">utf-8[unix]</div>
+            <div class="sepr-3a-2a"></div>
+            <div class="level-2a">69%</div>
+            <div class="sepr-2a-1r"></div>
+            <div class="level-1r">13/37</div>
         </div>
     </div>
-    <div class=preview>
-        <div class="level-1">level1</div>
-        <div class="sep-1-2"></div>
-        <div class="level-2">level2</div>
-        <div class="sep-2-3"></div>
-        <div class="level-3">level3</div>
-        <div class="sep-3-4"></div>
-        <div class="level-4">level4</div>
-        <div class="sepr-4-3"></div>
-        <div class="level-3">level3</div>
-        <div class="sepr-3-2"></div>
-        <div class="level-2">level2</div>
-        <div class="sepr-2-1"></div>
-        <div class="level-1">level1</div>
+    <div class="column right">
+        Right
     </div>
-
     <script src="preview.js"></script>
 </body>

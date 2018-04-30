@@ -57,5 +57,37 @@ function redrawSeperators() {
     });
 }
 
+/* Draw uploaded image onto the canvas */
+function imgUploadHandler(e) {
+    var reader = new FileReader();
+    var f = e.target.files.item(0);
+
+    reader.onload = function(e) {
+        $("#canvas-placeholder").hide();
+        var canvas = $("#cs");
+        canvas.show();
+        var img = new Image();
+        img.setAttribute("src", e.target.result);
+        img.addEventListener("load", function() {
+            canvas[0].getContext("2d").drawImage(
+                img, 0, 0, img.width, img.height,
+                0, 0, canvas[0].width, canvas[0].height
+            );
+        });
+    }
+
+    reader.readAsDataURL(f);
+}
+
+$("#img-upload").change(imgUploadHandler);
+
+$("#canvas-placeholder-text").click(function() {
+    $("#img-upload").click();
+});
+
+/* Initialize page:
+ *
+ * Assign levels and update seperators
+ */
 setLevelClassStyle();
 redrawSeperators();

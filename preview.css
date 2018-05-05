@@ -64,6 +64,15 @@
     right: 0;
 }
 
+#preview-term {
+    width: 10%;
+    padding: 10px;
+}
+
+.termbg {
+    background-color: var(--t-background);
+}
+
 #canvas-placeholder {
     background-color: #aaaaaa;
     width: 100%;
@@ -72,9 +81,6 @@
 }
 
 #canvas-placeholder-text {
-    font-family: "Noto Sans", sans-serif;
-    cursor: pointer;
-    color: #eeeeee;
     font-size: 32px;
     position: absolute;
     left: 50%;
@@ -82,7 +88,14 @@
     transform: translate(-50%, -50%);
 }
 
-#canvas-placeholder-text:hover {
+.button {
+    font-family: "Noto Sans", sans-serif;
+    cursor: pointer;
+    color: #eeeeee;
+}
+
+.button:hover {
+    font-weight: 500;
     color: #ffffff;
 }
 
@@ -97,6 +110,14 @@
 
 .spacer {
     height: 20px;
+}
+
+#output-methods > div, a {
+    display: inline-block;
+}
+
+#output {
+    display: none;
 }
 
 body {
@@ -140,4 +161,30 @@ body {
     /* for line ends */
     --lnone-fg: transparent;
     --lnone-bg: transparent;
+
+    --t-black:#1C1C1C;
+    --t-altblack:#404040;
+
+    --t-red:#B85335;
+    --t-altred:#CF6A4C;
+
+    --t-green:#87AF5F;
+    --t-altgreen:#99AD6A;
+
+    --t-yellow:#FFAF5F;
+    --t-altyellow:#FAD07A;
+
+    --t-blue:#667899;
+    --t-altblue:#8197BF;
+
+    --t-magenta:#8787AF;
+    --t-altmagenta:#C6B6EE;
+
+    --t-cyan:#668799;
+    --t-altcyan:#8FBFDC;
+
+    --t-white:#888888;
+    --t-altwhite:#FFFFFF;
+    --t-background:#0e0e0e;
+    --t-foreground:#ffffff;
 }

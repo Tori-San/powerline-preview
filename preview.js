@@ -117,7 +117,7 @@ function updatePreview() {
     redrawSeperators();
     s = "";
     for (let k in nameMap) {
-        s += nameMap[k] + ": " + chroma($("body").css(k)).hex() + "\n";
+        s += nameMap[k] + ": \"" + chroma($("body").css(k)).hex() + "\"\n";
     }
     $("#output").html(s);
     $("#output-file").attr("href", "data:text/plain;charset=utf-8," + encodeURIComponent(s));

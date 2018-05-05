@@ -1,340 +1,300 @@
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<style>
-
-@font-face{
-    font-family: "Hack";
-    src: url("fonts/Hack-Regular.ttf");
-}
-
-@font-face {
-    font-family: "FontAwesome";
-    src: url("fonts/fontawesome-webfont.ttf");
-}
-
-@font-face {
-    font-family: "PowerlineSymbols";
-    src: url("fonts/PowerlineSymbols.otf");
-}
-
-.ib {
-    display: inline-block;
-    font-family: FontAwesome, Hack, PowerlineSymbols;
-    font-size: 16px;
-}
-
-body {
-    --l1-fg:#000000;
-    --l1-bg:#ffffff;
-    --l1-fg-alt:#000000;
-    --l1-bg-alt:#ffffff;
-    --l1-fg-vis:#000000;
-    --l1-bg-vis:#ffffff;
-    --l1-fg-rep:#000000;
-    --l1-bg-rep:#ffffff;
-    --l2-fg:#ffffff;
-    --l2-bg:#000000;
-    --l2-fg-alt:#ffffff;
-    --l2-bg-alt:#000000;
-    --l3-fg:#888888;
-    --l3-bg:#000000;
-    --l3-fg-alt:#888888;
-    --l3-bg-alt:#000000;
-    --l4-fg:#888888;
-    --l4-bg:#000000;
-    --l4-fg-alt:#888888;
-    --l4-bg-alt:#000000;
-    background-color: #252525;
-}
-
-div#content {
-    position: relative;
-    width: 960px;
-    left: 50%;
-    top: 30px;
-    transform: translateX(-50%);
-    background-color: #888888;
-    border: 20px solid #888888;
-}
-
-div#preview_wm {
-    position: relative;
-}
-
-#preview_placeholder {
-    background-color: #aaaaaa;
-    width: 960px;
-    height: 540px;
-    position: relative;
-}
-
-#preview_placeholder_text {
-    color: #eeeeee;
-    font-size: 32px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
-div#preview_l {
-    font-size: 0;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
-
-div#preview_r {
-    font-size: 0;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-
-div#preview_vim {
-    margin-top: 20px;
-    font-size: 0;
-}
-
-div#vsplit {
-    font-family: Hack;
-    margin-top: 20px;
-    overflow: hidden;
-    height: auto;
-}
-
-div#selectors {
-    float:left;
-}
-
-div#output {
-    float:right;
-    color: #ffffff;
-    background-color: #444444;
-    border: 20px solid #444444;
-}
-
-#current_color {
-    margin-top: 10px;
-    width: 150px;
-    height: 50px;
-}
-
-#layer_select {
-    margin: 10px 0px 10px 0px;
-}
-</style>
-
-<div id="content">
-    <!-- preview -->
-    <div id="preview_wm">
-        <div id="preview_placeholder">
-            <div id="preview_placeholder_text">select an image</div>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.7/chroma.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="preview.css" />
+</head>
+<body>
+    <div class="column left">
+        <table>
+            <tr>
+                <td>
+                    <div class="preview"><div class="level-1">Level 1</div>
+                    <div class="sep-1-none"></div></div>
+                </td>
+                <td id="button-l1-fg" class="button">Set fg</td>
+                <td id="button-l1-bg" class="button">Set bg</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview"><div class="level-1a">L 1 alt</div>
+                    <div class="sep-1a-none"></div></div>
+                </td>
+                <td id="button-l1a-fg" class="button">Set fg</td>
+                <td id="button-l1a-bg" class="button">Set bg</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview"><div class="level-1v">L 1 vis</div>
+                    <div class="sep-1v-none"></div></div>
+                </td>
+                <td id="button-l1v-fg" class="button">Set fg</td>
+                <td id="button-l1v-bg" class="button">Set bg</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview"><div class="level-1r">L 1 rep</div>
+                    <div class="sep-1r-none"></div></div>
+                </td>
+                <td id="button-l1r-fg" class="button">Set fg</td>
+                <td id="button-l1r-bg" class="button">Set bg</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview"><div class="level-2">Level 2</div>
+                    <div class="sep-2-none"></div></div>
+                </td>
+                <td id="button-l2-fg" class="button">Set fg</td>
+                <td id="button-l2-bg" class="button">Set bg</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview"><div class="level-2a">L 2 alt</div>
+                    <div class="sep-2a-none"></div></div>
+                </td>
+                <td id="button-l2a-fg" class="button">Set fg</td>
+                <td id="button-l2a-bg" class="button">Set bg</td>
+            <tr>
+            <tr>
+                <td>
+                    <div class="preview"><div class="level-3">Level 3</div>
+                    <div class="sep-3-none"></div></div>
+                </td>
+                <td id="button-l3-fg" class="button">Set fg</td>
+                <td id="button-l3-bg" class="button">Set bg</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview"><div class="level-3a">L 3 alt</div>
+                    <div class="sep-3a-none"></div></div>
+                </td>
+                <td id="button-l3a-fg" class="button">Set fg</td>
+                <td id="button-l3a-bg" class="button">Set bg</td>
+            <tr>
+            <tr>
+                <td>
+                    <div class="preview"><div class="level-4">Level 4</div>
+                    <div class="sep-4-none"></div></div>
+                </td>
+                <td id="button-l4-fg" class="button">Set fg</td>
+                <td id="button-l4-bg" class="button">Set bg</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview"><div class="level-4a">L 4 alt</div>
+                    <div class="sep-4a-none"></div></div>
+                </td>
+                <td id="button-l4a-fg" class="button">Set fg</td>
+                <td id="button-l4a-bg" class="button">Set bg</td>
+            <tr>
+            <tr class="spacer"><td></td></tr>
+            <tr>
+                <td>
+                    <div class="preview termbg"><div class="term-foreground">default</div></div>
+                </td>
+                <td id="button-t-foreground" class="button">Set</td>
+                <td id="button-t-background" class="button">Set bg</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview termbg"><div class="term-black">black</div></div>
+                </td>
+                <td id="button-t-black" class="button">Set</td>
+                <td id="button-t-altblack" class="button">Set alt</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview termbg"><div class="term-red">red</div></div>
+                </td>
+                <td id="button-t-red" class="button">Set</td>
+                <td id="button-t-altred" class="button">Set alt</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview termbg"><div class="term-green">green</div></div>
+                </td>
+                <td id="button-t-green" class="button">Set</td>
+                <td id="button-t-altgreen" class="button">Set alt</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview termbg"><div class="term-yellow">yellow</div></div>
+                </td>
+                <td id="button-t-yellow" class="button">Set</td>
+                <td id="button-t-altyellow" class="button">Set alt</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview termbg"><div class="term-blue">blue</div></div>
+                </td>
+                <td id="button-t-blue" class="button">Set</td>
+                <td id="button-t-altblue" class="button">Set alt</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview termbg"><div class="term-magenta">magenta</div></div>
+                </td>
+                <td id="button-t-magenta" class="button">Set</td>
+                <td id="button-t-altmagenta" class="button">Set alt</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview termbg"><div class="term-cyan">cyan</div></div>
+                </td>
+                <td id="button-t-cyan" class="button">Set</td>
+                <td id="button-t-altcyan" class="button">Set alt</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="preview termbg"><div class="term-white">white</div></div>
+                </td>
+                <td id="button-t-white" class="button">Set</td>
+                <td id="button-t-altwhite" class="button">Set alt</td>
+            </tr>
+        </table>
+        <div class="spacer"></div>
+        <div id="output-methods">
+            <div id="output-clipboard" class="button">copy</div>
+            <a id="output-file" class="button" download="colors.yaml">download</a>
         </div>
-        <canvas id="cs" width=960 height=540 style="display:none;"></canvas>
-        <div id="preview_l">
-            <div class="ib" style="color: var(--l1-fg); background-color: var(--l1-bg);">&thinsp;&#xf0ae;&thinsp;</div>
-            <div class="ib" style="color: var(--l1-bg); background-color: var(--l2-bg);">&#xe0b0;&thinsp;</div>
-            <div class="ib" style="color: var(--l2-fg); background-color: var(--l2-bg);">1 &#xf268;&thinsp;</div>
-            <div class="ib" style="color: var(--l2-bg); background-color: var(--l1-bg);">&#xe0b0;&thinsp;</div>
-            <div class="ib" style="color: var(--l1-fg); background-color: var(--l1-bg);">2 &#xf120;&thinsp;</div>
-            <div class="ib" style="color: var(--l1-bg); background-color: var(--l2-bg);">&#xe0b0;&thinsp;</div>
-            <div class="ib" style="color: var(--l2-fg); background-color: var(--l2-bg);">3 &#xf120;  &#xe0b1;&thinsp;</div>
-            <div class="ib" style="color: var(--l3-fg); background-color: var(--l3-bg);">&thinsp;window title&thinsp;</div>
-            <div class="ib" style="color: var(--l3-bg);">&#xe0b0;&thinsp;</div>
-        </div>
-        <div id="preview_r">
-            <div class="ib" style="color: var(--l3-bg);">&thinsp;&#xe0b2;</div>
-            <div class="ib" style="color: #6688ff; background-color: var(--l3-bg);">&thinsp;42.0&#xb0;C&thinsp;</div>
-            <div class="ib" style="color: #719e07; background-color: var(--l3-bg);">&#xe0b3;&thinsp;&thinsp;1%&thinsp;</div>
-            <div class="ib" style="color: #719e07; background-color: var(--l3-bg);">&#xe0b3;&thinsp;&thinsp;69% @ Wifi&thinsp;</div>
-            <div class="ib" style="color: var(--l2-fg); background-color: var(--l2-bg);">&#xe0b3; Dec 25</div>
-            <div class="ib" style="color: var(--l1-bg); background-color: var(--l2-bg);">&thinsp;&#xe0b2;</div>
-            <div class="ib" style="color: var(--l1-fg); background-color: var(--l1-bg);">&thinsp;13:37&thinsp;</div>
-        </div>
+        <div class="spacer"></div>
+        <textarea id="output"></textarea>
     </div>
-
-    <div id="preview_vim">
-        <div>
-            <div class="ib" style="color: var(--l1-fg); background-color: var(--l1-bg);">&thinsp;NORMAL&thinsp;</div>
-            <div class="ib" style="color: var(--l1-bg); background-color: var(--l2-bg);">&#xe0b0;&thinsp;</div>
-            <div class="ib" style="color: var(--l2-fg); background-color: var(--l2-bg);">&thinsp;master &#xe0b1;&thinsp;</div>
-            <div class="ib" style="color: var(--l3-fg); background-color: var(--l3-bg);">&thinsp;preview.html&thinsp;</div>
-            <div class="ib" style="color: var(--l3-bg);">&#xe0b0;&thinsp;</div>
-        </div>
-        <div style="margin-top: 5px;">
-            <div class="ib" style="color: var(--l1-fg-alt); background-color: var(--l1-bg-alt);">&thinsp;INSERT&thinsp;</div>
-            <div class="ib" style="color: var(--l1-bg-alt); background-color: var(--l2-bg-alt);">&#xe0b0;&thinsp;</div>
-            <div class="ib" style="color: var(--l2-fg-alt); background-color: var(--l2-bg-alt);">&thinsp;master &#xe0b1;&thinsp;</div>
-            <div class="ib" style="color: var(--l3-fg-alt); background-color: var(--l3-bg-alt);">&thinsp;preview.html&thinsp;</div>
-            <div class="ib" style="color: var(--l3-bg-alt);">&#xe0b0;&thinsp;</div>
-        </div>
-        <div style="margin-top: 5px;">
-            <div class="ib" style="color: var(--l1-fg-vis); background-color: var(--l1-bg-vis);">&thinsp;VISUAL&thinsp;</div>
-            <div class="ib" style="color: var(--l1-bg-vis); background-color: var(--l2-bg-alt);">&#xe0b0;&thinsp;</div>
-            <div class="ib" style="color: var(--l2-fg-alt); background-color: var(--l2-bg-alt);">&thinsp;master &#xe0b1;&thinsp;</div>
-            <div class="ib" style="color: var(--l3-fg-alt); background-color: var(--l3-bg-alt);">&thinsp;preview.html&thinsp;</div>
-            <div class="ib" style="color: var(--l3-bg-alt);">&#xe0b0;&thinsp;</div>
-        </div>
-        <div style="margin-top: 5px;">
-            <div class="ib" style="color: var(--l1-fg-rep); background-color: var(--l1-bg-rep);">&thinsp;RPLACE&thinsp;</div>
-            <div class="ib" style="color: var(--l1-bg-rep); background-color: var(--l2-bg-alt);">&#xe0b0;&thinsp;</div>
-            <div class="ib" style="color: var(--l2-fg-alt); background-color: var(--l2-bg-alt);">&thinsp;master &#xe0b1;&thinsp;</div>
-            <div class="ib" style="color: var(--l3-fg-alt); background-color: var(--l3-bg-alt);">&thinsp;preview.html&thinsp;</div>
-            <div class="ib" style="color: var(--l3-bg-alt);">&#xe0b0;&thinsp;</div>
-        </div>
-    </div>
-
-    <div id="vsplit">
-        <div id="selectors">
-            <div id="img_upload">
-                <input type="file" id="imgsrc" accept=".jpg, .jpeg, .png"/>
+    <div class="column middle">
+        <div id="preview-wm">
+            <div id="canvas-placeholder">
+                <input id="img-upload" type="file" accept=".jpg, .jpeg, .png">
+                <div id="canvas-placeholder-text" class="button">select an image</div>
             </div>
-            <input type=color id="current_color">
-            <form id="layer_select">
-                <input type="radio" name="level" value="--l1-fg" checked="checked">Level 1: foreground
-                </br>
-                <input type="radio" name="level" value="--l1-bg">Level 1: background
-                </br>
-                <input type="radio" name="level" value="--l1-fg-alt" style="margin-top: 10px;">Level 1: foreground (alt)
-                </br>
-                <input type="radio" name="level" value="--l1-bg-alt">Level 1: background (alt)
-                </br>
-                <input type="radio" name="level" value="--l1-fg-vis" style="margin-top: 10px;">Level 1: foreground (vis)
-                </br>
-                <input type="radio" name="level" value="--l1-bg-vis">Level 1: background (vis)
-                </br>
-                <input type="radio" name="level" value="--l1-fg-rep" style="margin-top: 10px;">Level 1: foreground (rep)
-                </br>
-                <input type="radio" name="level" value="--l1-bg-rep">Level 1: background (rep)
-                </br>
-                <input type="radio" name="level" value="--l2-fg" style="margin-top: 10px;">Level 2: foreground
-                </br>
-                <input type="radio" name="level" value="--l2-bg">Level 2: background
-                </br>
-                <input type="radio" name="level" value="--l2-fg-alt" style="margin-top: 10px;">Level 2: foreground (alt)
-                </br>
-                <input type="radio" name="level" value="--l2-bg-alt">Level 2: background (alt)
-                </br>
-                <input type="radio" name="level" value="--l3-fg" style="margin-top: 10px;">Level 3: foreground
-                </br>
-                <input type="radio" name="level" value="--l3-bg">Level 3: background
-                </br>
-                <input type="radio" name="level" value="--l3-fg-alt" style="margin-top: 10px;">Level 3: foreground (alt)
-                </br>
-                <input type="radio" name="level" value="--l3-bg-alt">Level 3: background (alt)
-                </br>
-                <input type="radio" name="level" value="--l4-fg" style="margin-top: 10px;">Level 4: foreground
-                </br>
-                <input type="radio" name="level" value="--l4-bg">Level 4: background
-                </br>
-                <input type="radio" name="level" value="--l4-fg-alt" style="margin-top: 10px;">Level 4: foreground (alt)
-                </br>
-                <input type="radio" name="level" value="--l4-bg-alt">Level 4: background (alt)
-                </br>
-            </form>
+            <canvas id="cs" width=960 height=540></canvas>
+            <div class="preview left">
+                <div class="level-1">&#xf0ae;<!-- ws-icon --></div>
+                <div class="sep-1-2"></div>
+                <div class="level-2">1 &#xf268;<!-- chrome --></div>
+                <div class="sep-2-1"></div>
+                <div class="level-1">2 &#xf120;<!-- >_ --></div>
+                <div class="sep-1-2"></div>
+                <div class="level-2">3 &#xf120;<!-- >_ --></div>
+                <div class="sep-2-2"></div>
+                <div class="level-2">&#x2022;<!-- dot --></div>
+                <div class="sep-2-3"></div>
+                <div class="level-3">window title</div>
+                <div class="sep-3-none"></div>
+            </div>
+            <div class="preview right">
+                <div class="sepr-none-3"></div>
+                <div class="level-3">W 6.6.6.6</div>
+                <div class="sepr-3-3"></div>
+                <div class="level-3">0W</div>
+                <div class="sepr-3-2"></div>
+                <div class="level-2">Dec 25</div>
+                <div class="sepr-2-1"></div>
+                <div class="level-1">13:37</div>
+            </div>
         </div>
-        <div id="output">
+        <div class=spacer></div>
+        <div id="preview-vim">
+            <div class=preview>
+                <div class="level-1">NORMAL</div>
+                <div class="sep-1-2"></div>
+                <div class="level-2">master</div>
+                <div class="sep-2-3"></div>
+                <div class="level-3">preview.js</div>
+                <div class="sep-3-4"></div>
+                <div class="level-4">javascript</div>
+                <div class="sepr-4-3"></div>
+                <div class="level-3">utf-8[unix]</div>
+                <div class="sepr-3-2"></div>
+                <div class="level-2">69%</div>
+                <div class="sepr-2-1"></div>
+                <div class="level-1">13/37</div>
+            </div>
+            <div class=preview>
+                <div class="level-1a">INSERT</div>
+                <div class="sep-1a-2a"></div>
+                <div class="level-2a">master</div>
+                <div class="sep-2a-3a"></div>
+                <div class="level-3a">preview.js</div>
+                <div class="sep-3a-4a"></div>
+                <div class="level-4a">javascript</div>
+                <div class="sepr-4a-3a"></div>
+                <div class="level-3a">utf-8[unix]</div>
+                <div class="sepr-3a-2a"></div>
+                <div class="level-2a">69%</div>
+                <div class="sepr-2a-1a"></div>
+                <div class="level-1a">13/37</div>
+            </div>
+            <div class=preview>
+                <div class="level-1v">VISUAL</div>
+                <div class="sep-1v-2a"></div>
+                <div class="level-2a">master</div>
+                <div class="sep-2a-3a"></div>
+                <div class="level-3a">preview.js</div>
+                <div class="sep-3a-4a"></div>
+                <div class="level-4a">javascript</div>
+                <div class="sepr-4a-3a"></div>
+                <div class="level-3a">utf-8[unix]</div>
+                <div class="sepr-3a-2a"></div>
+                <div class="level-2a">69%</div>
+                <div class="sepr-2a-1v"></div>
+                <div class="level-1v">13/37</div>
+            </div>
+            <div class=preview>
+                <div class="level-1r">RPLACE</div>
+                <div class="sep-1r-2a"></div>
+                <div class="level-2a">master</div>
+                <div class="sep-2a-3a"></div>
+                <div class="level-3a">preview.js</div>
+                <div class="sep-3a-4a"></div>
+                <div class="level-4a">javascript</div>
+                <div class="sepr-4a-3a"></div>
+                <div class="level-3a">utf-8[unix]</div>
+                <div class="sepr-3a-2a"></div>
+                <div class="level-2a">69%</div>
+                <div class="sepr-2a-1r"></div>
+                <div class="level-1r">13/37</div>
+            </div >
+        </div>
+        <div class=spacer></div>
+        <div id="preview-term" class="termbg">
+            <div>
+                <div class="term-foreground">default</div>
+            </div>
+            <div class=preview>
+                <div class="term-black">K 00</div>
+                <div class="term-altblack">08</div>
+            </div>
+            <div class=preview>a
+                <div class="term-red">R 01</div>
+                <div class="term-altred">09</div>
+            </div>
+            <div class=preview>
+                <div class="term-green">G 02</div>
+                <div class="term-altgreen">0A</div>
+            </div>
+            <div class=preview>
+                <div class="term-yellow">Y 03</div>
+                <div class="term-altyellow">0B</div>
+            </div>
+            <div class=preview>
+                <div class="term-blue">B 04</div>
+                <div class="term-altblue">0C</div>
+            </div>
+            <div class=preview>
+                <div class="term-magenta">M 05</div>
+                <div class="term-altmagenta">0D</div>
+            </div>
+            <div class=preview>
+                <div class="term-cyan">C 06</div>
+                <div class="term-altcyan">0E</div>
+            </div>
+            <div class=preview>
+                <div class="term-white">W 07</div>
+                <div class="term-altwhite">0F</div>
+            </div>
         </div>
     </div>
-</div>
-
-<script>
-
-var selected_color = "#000000";
-var selected_layer = "--l1-fg";
-
-function img_upload_handler(e) {
-    var reader = new FileReader();
-    var f = e.target.files.item(0);
-
-    reader.onload = function(e) {
-        $("#preview_placeholder").hide();
-        var canvas = $("#cs");
-        canvas.show();
-        var img = new Image();
-        img.setAttribute("src", e.target.result);
-        img.addEventListener("load", function() {
-            canvas[0].getContext("2d").drawImage(
-                img, 0, 0, img.width, img.height,
-                0, 0, canvas[0].width, canvas[0].height
-            );
-        });
-    }
-
-    reader.readAsDataURL(f);
-}
-
-function update_preview() {
-    $("#current_color").val(selected_color);
-
-    $("body").css(selected_layer, selected_color);
-
-    $("#output").html(
-        "level1_fg: '" + $("body").css("--l1-fg") + "'<br />" +
-        "level1_bg: '" + $("body").css("--l1-bg") + "'<br />" +
-        "<br />" +
-        "level1_fg_alt: '" + $("body").css("--l1-fg-alt") + "'<br />" +
-        "level1_bg_alt: '" + $("body").css("--l1-bg-alt") + "'<br />" +
-        "<br />" +
-        "level1_fg_vis: '" + $("body").css("--l1-fg-vis") + "'<br />" +
-        "level1_bg_vis: '" + $("body").css("--l1-bg-vis") + "'<br />" +
-        "<br />" +
-        "level1_fg_rep: '" + $("body").css("--l1-fg-rep") + "'<br />" +
-        "level1_bg_rep: '" + $("body").css("--l1-bg-rep") + "'<br />" +
-        "<br />" +
-        "level2_fg: '" + $("body").css("--l2-fg") + "'<br />" +
-        "level2_bg: '" + $("body").css("--l2-bg") + "'<br />" +
-        "<br />" +
-        "level2_fg_alt: '" + $("body").css("--l2-fg-alt") + "'<br />" +
-        "level2_bg_alt: '" + $("body").css("--l2-bg-alt") + "'<br />" +
-        "<br />" +
-        "level3_fg: '" + $("body").css("--l3-fg") + "'<br />" +
-        "level3_bg: '" + $("body").css("--l3-bg") + "'<br />" +
-        "<br />" +
-        "level3_fg_alt: '" + $("body").css("--l3-fg-alt") + "'<br />" +
-        "level3_bg_alt: '" + $("body").css("--l3-bg-alt") + "'<br />" +
-        "<br />" +
-        "level4_fg: '" + $("body").css("--l4-fg") + "'<br />" +
-        "level4_bg: '" + $("body").css("--l4-bg") + "'<br />" +
-        "<br />" +
-        "level4_fg_alt: '" + $("body").css("--l4-fg-alt") + "'<br />" +
-        "level4_bg_alt: '" + $("body").css("--l4-bg-alt") + "'<br />" +
-        "<br />"
-    );
-}
-
-$("#cs").on("click", function(e) {
-    var offset = $("#cs").offset();
-    var pos = {x: e.pageX - offset.left, y: e.pageY - offset.top};
-    var context = this.getContext('2d');
-    var rgb = context.getImageData(pos.x, pos.y, 1, 1).data;
-
-    selected_color = "#" +
-        ("0" + rgb[0].toString(16)).slice(-2) +
-        ("0" + rgb[1].toString(16)).slice(-2) +
-        ("0" + rgb[2].toString(16)).slice(-2);
-
-    update_preview();
-});
-
-$("#imgsrc").click(function() {
-    $(this).val("");
-});
-
-$("#imgsrc").on("change", img_upload_handler);
-
-$("#current_color").on("input", function() {
-    selected_color = $("#current_color").val();
-    update_preview();
-})
-
-$("input[name=level]").on("input", function() {
-    selected_layer = $("input[name=level]:checked").val();
-    selected_color = $("body").css(selected_layer);
-    update_preview();
-});
-
-update_preview();
-</script>
+    <div class="column right">
+        <div id="foobar">###</div>
+    </div>
+    <script src="preview.js"></script>
+</body>

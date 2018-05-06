@@ -134,7 +134,7 @@ $("#output-clipboard").click(function() {
 $("[id^=button]").click(function() {
     let cls = this.id;
     cls = "--" + cls.slice(cls.indexOf("button") + 7);
-    $("body").css(cls, $("#foobar").css("backgroundColor"))
+    $("body").css(cls, $("#col-picked").css("--current"));
     updatePreview();
 });
 
@@ -166,14 +166,44 @@ $("#canvas-placeholder-text").click(function() {
     $("#img-upload").click();
 });
 
-/* Color selection
- */
+/* Update color palette in the right column */
+function updateColorOptions(picked) {
+    $("#col-picked").css("--current", picked.css());
+    $("[id^=col-]").each(function() {
+        let [_, op, arg] = this.id.split("-")
+        if (picked[op] && arg) {
+            $(this).css("--current", picked[op](arg).css());
+        }
+    });
+    $("#col-analogous-1").css("--current", picked.set("hsl.h", "-30").css());
+    $("#col-analogous-2").css("--current", picked.set("hsl.h", "+0").css());
+    $("#col-analogous-3").css("--current", picked.set("hsl.h", "+30").css());
+
+    $("#col-splitcomp-1").css("--current", picked.set("hsl.h", "+150").css());
+    $("#col-splitcomp-2").css("--current", picked.set("hsl.h", "+0").css());
+    $("#col-splitcomp-3").css("--current", picked.set("hsl.h", "+210").css());
+
+    $("#col-triadic-1").css("--current", picked.set("hsl.h", "-120").css());
+    $("#col-triadic-2").css("--current", picked.set("hsl.h", "+0").css());
+    $("#col-triadic-3").css("--current", picked.set("hsl.h", "+120").css());
+
+    $("#col-tetradic-1").css("--current", picked.set("hsl.h", "-60").css());
+    $("#col-tetradic-2").css("--current", picked.set("hsl.h", "+0").css());
+    $("#col-tetradic-3").css("--current", picked.set("hsl.h", "+120").css());
+    $("#col-tetradic-4").css("--current", picked.set("hsl.h", "+180").css());
+}
+
+$("[id^=col-]").click(function() {
+    updateColorOptions(chroma($(this).css("--current")));
+});
+
+/* Color selection */
 $("#cs").click(function(e) {
     let offset = $(this).offset()
     let rgba = this.getContext('2d')
         .getImageData(e.pageX - offset.left, e.pageY - offset.top, 1, 1)
         .data;
-    $("#foobar").css("backgroundColor", chroma.rgb(rgba).css());
+    updateColorOptions(chroma.rgb(rgba));
 });
 
 /* Initialize page:
@@ -183,3 +213,4 @@ $("#cs").click(function(e) {
 setLevelClassStyle();
 setTermClassStyle();
 updatePreview();
+updateColorOptions(chroma($("body").css("--l1-bg")));

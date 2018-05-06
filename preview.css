@@ -120,6 +120,23 @@
     display: none;
 }
 
+.color {
+    --current: #ff6600;
+    cursor: pointer;
+    background-color: var(--current);
+    width: 32;
+    height: 32;
+    border: 5px solid #444444;
+}
+
+.color:hover {
+    border: 5px solid var(--current);
+}
+
+#colorpickers {
+    text-align: right;
+}
+
 body {
     display: table;
     height: 100%;

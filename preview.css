@@ -118,11 +118,11 @@
     text-align: center;
 }
 
-#output-methods > div, a {
-    display: inline-block;
+#output {
+    display: none;
 }
 
-#output {
+#output-json {
     display: none;
 }
 

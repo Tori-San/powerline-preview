@@ -112,15 +112,60 @@ var nameMap = {
     "--t-altwhite": "alt_white",
 }
 
+var nameMapJSON = {
+    "--l1-fg": "level:1_fg",
+    "--l1-bg": "level:1_bg",
+    "--l1a-fg": "level:1_fg_alt",
+    "--l1a-bg": "level:1_bg_alt",
+    "--l1v-fg": "level:1_fg_vis",
+    "--l1v-bg": "level:1_bg_vis",
+    "--l1r-fg": "level:1_fg_rep",
+    "--l1r-bg": "level:1_bg_rep",
+    "--l2-fg": "level:2_fg",
+    "--l2-bg": "level:2_bg",
+    "--l2a-fg": "level:2_fg_alt",
+    "--l2a-bg": "level:2_bg_alt",
+    "--l3-fg": "level:3_fg",
+    "--l3-bg": "level:3_bg",
+    "--l3a-fg": "level:3_fg_alt",
+    "--l3a-bg": "level:3_bg_alt",
+    "--l4-fg": "level:4_fg",
+    "--l4-bg": "level:4_bg",
+    "--l4a-fg": "level:4_fg_alt",
+    "--l4a-bg": "level:4_bg_alt",
+    "--t-background": "background",
+    "--t-foreground": "foreground",
+    "--t-black": "black",
+    "--t-altblack": "alt_black",
+    "--t-red": "red",
+    "--t-altred": "alt_red",
+    "--t-green": "green",
+    "--t-altgreen": "alt_green",
+    "--t-yellow": "yellow",
+    "--t-altyellow": "alt_yellow",
+    "--t-blue": "blue",
+    "--t-altblue": "alt_blue",
+    "--t-magenta": "magenta",
+    "--t-altmagenta": "alt_magenta",
+    "--t-cyan": "cyan",
+    "--t-altcyan": "alt_cyan",
+    "--t-white": "white",
+    "--t-altwhite": "alt_white",
+}
 /* Update stuff that is not automatically updated by css variables */
 function updatePreview() {
     redrawSeperators();
-    s = "";
+    let s = "";
+    let json_s = "";
     for (let k in nameMap) {
-        s += nameMap[k] + ": \"" + chroma($("body").css(k)).hex() + "\"\n";
+        let col = chroma($("body").css(k)).hex();
+        s += nameMap[k] + ": \"" + col + "\"\n";
+        json_s += "\"" + nameMapJSON[k] + "\": \"" + col + "\"\n";
     }
     $("#output").html(s);
+    $("#output-json").html(json_s);
     $("#output-file").attr("href", "data:text/plain;charset=utf-8," + encodeURIComponent(s));
+    $("#output-file-json").attr("href", "data:text/plain;charset=utf-8," + encodeURIComponent(json_s));
 }
 
 $("#output-clipboard").click(function() {
@@ -128,6 +173,13 @@ $("#output-clipboard").click(function() {
     $("#output").select();
     document.execCommand("copy");
     $("#output").hide();
+});
+
+$("#output-clipboard-json").click(function() {
+    $("#output-json").show();
+    $("#output-json").select();
+    document.execCommand("copy");
+    $("#output-json").hide();
 });
 
 /* Make buttons apply or get the currently selected color */

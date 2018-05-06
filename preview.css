@@ -13,8 +13,6 @@
     src: url("fonts/fontawesome-webfont.ttf");
 }
 
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
-
 .column {
     vertical-align: top;
     background-color: #888888;
@@ -89,13 +87,13 @@
 }
 
 .button {
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Hack";
     cursor: pointer;
     color: #eeeeee;
 }
 
 .button:hover {
-    font-weight: 500;
+    font-weight: 700;
     color: #ffffff;
 }
 
@@ -110,6 +108,14 @@
 
 .spacer {
     height: 20px;
+}
+
+#setters {
+    width: 100%;
+}
+
+#setters > tbody > tr > td {
+    text-align: center;
 }
 
 #output-methods > div, a {
@@ -134,6 +140,7 @@
 }
 
 #colorpickers {
+    font-family: "Hack";
     text-align: right;
 }
 

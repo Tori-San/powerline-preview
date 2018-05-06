@@ -130,12 +130,24 @@ $("#output-clipboard").click(function() {
     $("#output").hide();
 });
 
-/* Make buttons apply the currently selected color */
+/* Make buttons apply or get the currently selected color */
 $("[id^=button]").click(function() {
     let cls = this.id;
     cls = "--" + cls.slice(cls.indexOf("button") + 7);
     $("body").css(cls, $("#col-picked").css("--current"));
     updatePreview();
+});
+$("[id^=get]").click(function() {
+    let cls = this.id
+    cls = "--" + cls.slice(cls.indexOf("get") + 4);
+    updateColorOptions(chroma($("body").css(cls)));
+});
+
+/* Automatically set alt term colors based on normal term colors */
+$("#term-auto-alt").click(function() {
+    for (s of ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"]) {
+        $("body").css("--t-alt" + s, chroma($("body").css("--t-" + s)).brighten(1).css());
+    }
 });
 
 /* Draw uploaded image onto the canvas */

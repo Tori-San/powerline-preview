@@ -233,12 +233,7 @@ $("#canvas-placeholder-text").click(function() {
 /* Update color palette in the right column */
 function updateColorOptions(picked) {
     $("#col-picked").css("--current", picked.css());
-    $("[id^=col-]").each(function() {
-        let [_, op, arg] = this.id.split("-")
-        if (picked[op] && arg) {
-            $(this).css("--current", picked[op](arg).css());
-        }
-    });
+
     $("#col-analogous-1").css("--current", picked.set("hsl.h", "-30").css());
     $("#col-analogous-2").css("--current", picked.set("hsl.h", "+0").css());
     $("#col-analogous-3").css("--current", picked.set("hsl.h", "+30").css());
@@ -255,6 +250,14 @@ function updateColorOptions(picked) {
     $("#col-tetradic-2").css("--current", picked.set("hsl.h", "+0").css());
     $("#col-tetradic-3").css("--current", picked.set("hsl.h", "+120").css());
     $("#col-tetradic-4").css("--current", picked.set("hsl.h", "+180").css());
+
+    $("[id^=col-]").each(function() {
+        let [_, op, arg] = this.id.split("-")
+        if (picked[op] && arg) {
+            $(this).css("--current", picked[op](arg).css());
+        }
+        $(this).attr("title", chroma($(this).css("--current")).hex());
+    });
 }
 
 $("[id^=col-]").click(function() {

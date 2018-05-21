@@ -99,7 +99,24 @@
 
 #cs {
     display: none;
-    cursor: crosshair;
+    z-index: 1;
+}
+
+#cs-eye {
+    display: none;
+    position: absolute;
+    z-index: 2;
+}
+
+#cs-overlay {
+    position: absolute;
+    display: none;
+    top: 0px;
+    left: 0px;
+    width: 960px;
+    height: 540px;
+    cursor: none;
+    z-index: 3;
 }
 
 #img-upload {

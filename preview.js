@@ -211,6 +211,8 @@ function imgUploadHandler(e) {
         $("#canvas-placeholder").hide();
         var canvas = $("#cs");
         canvas.show();
+        $("#cs-eye").show();
+        $("#cs-overlay").show();
         var img = new Image();
         img.setAttribute("src", e.target.result);
         img.addEventListener("load", function() {
@@ -264,13 +266,49 @@ $("[id^=col-]").click(function() {
     updateColorOptions(chroma($(this).css("--current")));
 });
 
-/* Color selection */
-$("#cs").click(function(e) {
-    let offset = $(this).offset()
-    let rgba = this.getContext('2d')
-        .getImageData(e.pageX - offset.left, e.pageY - offset.top, 1, 1)
+/* Eye visibility + movement */
+$("#cs-overlay").mouseenter(function(e) {
+    $("#cs-eye").show();
+});
+
+$("#cs-overlay").mouseleave(function(e) {
+    $("#cs-eye").hide();
+});
+
+var eye_picked;
+
+$("#cs-overlay").mousemove(function(e) {
+    let offset = $(this).offset();
+    let x = e.pageX - offset.left, y = e.pageY - offset.top;
+    $("#cs-eye").css({
+        left: x - $("#cs-eye").width() / 2,
+        top: y - $("#cs-eye").height() / 2,
+    });
+
+    let n = 5, a = 6, b = 1;
+
+    let eye = $("#cs-eye")[0];
+    let canvas = $("#cs")[0];
+    let ctx = eye.getContext("2d");
+    ctx.fillStyle = "#808080";
+    ctx.fillRect(0, 0, eye.width, eye.height);
+    ctx.fillStyle = "#ff0000";
+    ctx.fillRect(Math.floor(n/2)*(a+b), Math.floor(n/2)*(a+b), a+2*b, a+2*b);
+    var rgba = canvas.getContext("2d")
+        .getImageData(x - Math.floor(n/2), y - Math.floor(n/2), n, n)
         .data;
-    updateColorOptions(chroma.rgb(rgba));
+    eye_picked = chroma.rgb(rgba.slice(4 * (n+1) * Math.floor(n/2), 4 * ((n+1) * Math.floor(n/2)+1)));
+    for (let j = 0; j < n; ++j) {
+        for (let i = 0; i < n; ++i) {
+            ctx.fillStyle = chroma.rgb(rgba.slice(4 * (n * j + i), 4 * (n * j + i + 1))).hex();
+            ctx.fillRect((a+b) * i + 1, (a+b) * j + 1, a, a);
+        }
+    }
+});
+
+/* Color selection */
+$("#cs-overlay").click(function(e) {
+    updateColorOptions(eye_picked);
 });
 
 /* Initialize page:
